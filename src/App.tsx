@@ -1,11 +1,9 @@
-import { Button } from "@/components/ui/button";
+// src/App.tsx
+import { Router } from "./router/router";
+import "./App.css";
 
 function App() {
-  return (
-    <div className="flex flex-col items-center justify-center min-h-svh">
-      <Button>Click me</Button>
-    </div>
-  );
+  return <Router />;
 }
 
 export default App;
