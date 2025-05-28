@@ -1,6 +1,6 @@
 // src/components/layout/AppSidebar.tsx
-import { Home, Info } from "lucide-react";
-import { Link, useLocation } from "react-router";
+import { Home, Info, LogOut, Database } from "lucide-react";
+import { Link, useLocation, useNavigate } from "react-router";
 
 import {
   Sidebar,
@@ -13,6 +13,7 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
+import { useAuthStore } from "@/store/auth-store";
 
 // Menu items
 const items = [
@@ -26,10 +27,22 @@ const items = [
     url: "/about",
     icon: Info,
   },
+  {
+    title: "Test Fetch",
+    url: "/test-fetch",
+    icon: Database,
+  },
 ];
 
 export function AppSidebar() {
   const location = useLocation();
+  const navigate = useNavigate();
+  const signOut = useAuthStore((state) => state.signOut);
+
+  const handleSignOut = async () => {
+    await signOut();
+    navigate("/auth");
+  };
 
   return (
     <Sidebar>
@@ -56,8 +69,17 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
       <SidebarFooter>
-        <div className="p-2 text-xs text-muted-foreground">
-          Vite + React + TypeScript
+        <div className="space-y-4 p-2">
+          <SidebarMenuButton
+            onClick={handleSignOut}
+            className="w-full justify-start text-destructive hover:text-destructive"
+          >
+            <LogOut />
+            <span>Sign Out</span>
+          </SidebarMenuButton>
+          <div className="text-xs text-muted-foreground">
+            Vite + React + TypeScript
+          </div>
         </div>
       </SidebarFooter>
     </Sidebar>

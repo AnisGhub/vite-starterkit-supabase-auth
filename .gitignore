@@ -12,13 +12,26 @@ dist
 dist-ssr
 *.local
 
-# Editor directories and files
+# Environment files
+.env
+.env.local
+.env.*.local
+
+# Supabase
+**/supabase/.temp
+**/supabase/.env
+
+# Editor
 .vscode/*
 !.vscode/extensions.json
+!.vscode/settings.json
 .idea
-.DS_Store
 *.suo
 *.ntvs*
 *.njsproj
 *.sln
 *.sw?
+
+# Temp files
+.DS_Store
+Thumbs.db
